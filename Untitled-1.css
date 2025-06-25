@@ -1,9 +1,9 @@
-/* Reset & Base Styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
@@ -11,74 +11,79 @@ body {
   background-color: #f9f9f9;
 }
 
-/* Top Ribbon Header */
+/* Top Ribbon Header - Base (applies to all screen sizes) */
 .top-ribbon {
   background-image: url('Banner Background.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
- /* background-color: #534e4e;*/
-  padding: 5px 5px;
+  padding: 5px 10px;
   position: sticky;
   top: 0;
-  z-index: 50;
-
+  z-index: 1000;
+  display: flex;
+  align-items: center;
 }
 
+/* Container inside ribbon */
 .container {
   display: flex;
   flex-direction: row;     
   justify-content: space-between;
   align-items: center;
-  padding: 0px 10px;
+  width: 100%;
   max-width: 1200px;
   margin: auto;
+  padding: 0 10px;
 }
 
-  .logo-section {
-    display: flex;
-    align-items: center;  
-    gap: 10px;             
-  }
+/* Logo section with image and text */
+.logo-section {
+  display: flex;
+  align-items: center;  
+  gap: 10px;             
+}
 
-
-
-/* Resize image so it fits neatly beside text */
+/* Logo image */
 .logo {
-  height: 100%;  
-  height: 90px;
+  height: 60px;
   width: auto;
   object-fit: contain;
-  display: block;
-  margin: 0;
-  padding: 0;
 }
 
-/* Stylized Text */
+/* Logo text */
 .logo-text {
   display: flex;
   flex-direction: column;
   line-height: 1.2;
 }
 
+/* Individual text lines */
 .logo-text .line-one,
 .logo-text .line-two {
   font-size: 2.5rem;
   font-family: "Bebas Neue", sans-serif;
-  font-weight: 700; /* 'bold' as a number */
+  font-weight: 700;
   font-style: normal;
-  color: #080500; /* amber-500 */
+  color: #000; /* Gold */
+  text-shadow:
+    -1px -1px 0 #888383,
+     1px -1px 0 #888383,
+    -1px  1px 0 #888383,
+     1px  1px 0 #888383;
 }
+
+/* Navigation */
 .nav-links {
   display: flex;
-  gap: 5px;
-  margin-left: auto; 
+  gap: 8px;
+  margin-left: auto;
 }
 
 .nav-button {
   text-decoration: none;
-  padding: 8px 16px;
-  background-color: #fbbf24;   
+  padding: 8px 14px;
+  background-color: #fbbf24; /* Amber */
   color: #000;
   font-weight: 600;
   border-radius: 6px;
@@ -86,10 +91,41 @@ body {
 }
 
 .nav-button:hover {
-  background-color: #f59e0b;  
+  background-color: #f59e0b;
   color: white;
 }
 
+/* Mobile-specific tweaks */
+@media (max-width: 480px) {
+  .logo {
+    height: 45px;
+  }
+
+  .logo-text .line-one {
+    font-size: 1.5rem;
+  }
+
+  .logo-text .line-two {
+    font-size: 1.1rem;
+  }
+
+  .nav-button {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
+
+  .container {
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}
 
 
 /* Hero Section */
