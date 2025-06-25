@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -85,17 +85,47 @@
   </section>
   
 
-  <!-- Contact Form -->
-  <section id="contact" class="scroll-mt-24 bg-gray-100 py-16 px-4">
-    <h2 class="text-3xl font-bold text-center mb-8">Contact Us</h2>
-    <form class="max-w-xl mx-auto bg-white p-8 rounded shadow space-y-4">
-      <input type="text" placeholder="Name" class="w-full border border-gray-300 p-3 rounded" required>
-      <input type="email" placeholder="Email" class="w-full border border-gray-300 p-3 rounded" required>
-      <input type="tel" placeholder="Phone" class="w-full border border-gray-300 p-3 rounded">
-      <textarea placeholder="Your Message" class="w-full border border-gray-300 p-3 rounded h-32" required></textarea>
-      <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white p-3 rounded font-semibold">Send Message</button>
-    </form>
-  </section>
+<!-- Contact Form -->
+<section id="contact" class="scroll-mt-24 bg-gray-100 py-16 px-4">
+  <h2 class="text-3xl font-bold text-center mb-8">Contact Us</h2>
+  <form id="contact-form" class="max-w-xl mx-auto bg-white p-8 rounded shadow space-y-4">
+    <input type="text" name="name" placeholder="Contact Name" class="w-full border border-gray-300 p-3 rounded" required>
+    <input type="email" name="email" placeholder="Email Address" class="w-full border border-gray-300 p-3 rounded" required>
+    <input type="tel" name="phone" placeholder="Phone Number" class="w-full border border-gray-300 p-3 rounded">
+    <textarea name="message" placeholder="Your Message" class="w-full border border-gray-300 p-3 rounded h-32" required></textarea>
+    <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white p-3 rounded font-semibold">Send Message</button>
+  </form>
+</section>
+
+<!-- Script to submit to Google Apps Script -->
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbwqGJ_roTEoKQ7K5yzyVP7Z5HMNDTmx62cqJJjH2wP9O3kM3aB4oCeS-kho8sg3aXTC/exec'; 
+  const form = document.getElementById('contact-form');
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    fetch(scriptURL, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => res.json())
+    .then(res => {
+      alert('Message sent successfully!');
+      form.reset();
+    })
+    .catch(error => {
+      console.error('Error!', error.message);
+      alert('There was an error sending your message.');
+    });
+  });
+</script>
+
 
   <!-- Footer -->
   <footer class="bg-gray-800 text-white text-center py-6">
