@@ -110,9 +110,7 @@
     // Send to Google Apps Script
     fetch(scriptURL, {
       method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json'
+       body: formData 
       }
     })
     .then(response => response.json())
